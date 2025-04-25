@@ -21,7 +21,7 @@ const Verify = () => {
         return null
       }
       
-      const response = await axios.post(backendURL + '/api/order/verifyStripe',{success, orderId}, {headers:{token}})
+      const response = await axios.post(backendURL + '/api/order/verifyStripe',{success, orderId}, {headers:{token},withCredentials: true})
 
       if(response.data.success){
         setCartItems({})

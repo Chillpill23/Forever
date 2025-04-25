@@ -44,7 +44,7 @@ const Add = ({token}) => {
       image4 && formData.append("image4", image4)
 
       const response = await toast.promise(
-        axios.post(backendUrl + "/api/product/add", formData, {headers:{token}}),
+        axios.post(backendUrl + "/api/product/add", formData, {headers:{token}, withCredentials: true}),
         {
           pending: 'Adding Product',
           success: 'Product has been added',

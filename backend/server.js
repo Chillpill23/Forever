@@ -16,7 +16,37 @@ connectCloudinary();
 
 // middlewares
 app.use(express.json())
-app.use(cors())
+
+const allowedOrigins = [
+  'https://forever-frontend-eight-blush.vercel.app',
+  'https://forever-admin-mu-ten.vercel.app'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log('Blocked by CORS:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
+// Handle preflight OPTIONS requests
+app.options('*', cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+}));
+
+
 
 // api endpoints
 app.use('/api/user', userRouter);
