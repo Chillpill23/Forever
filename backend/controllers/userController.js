@@ -1,7 +1,7 @@
 // Route for user login
 import userModel from "../models/userModel.js";
 import validator from 'validator'
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 
